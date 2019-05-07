@@ -72,6 +72,20 @@ HRESULT WindowSystem::Init()
 			this
 		);
 
+		/*m_mainHwnd = CreateWindow(
+			L"AtS Project",
+			L"Ats Project",
+			WS_OVERLAPPEDWINDOW,
+			0,
+			0,
+			200,
+			200,
+			NULL,
+			NULL,
+			HINST_THISCOMPONENT,
+			this
+		);*/
+
 		hr = m_mainHwnd ? S_OK : E_FAIL;
 		hr = CreateRenderWindow();
 
@@ -84,6 +98,7 @@ HRESULT WindowSystem::Init()
 			int width = GetSystemMetrics(SM_CXSCREEN);
 			int height = GetSystemMetrics(SM_CYSCREEN);
 			SetWindowPos(m_mainHwnd, HWND_TOPMOST, 0, 0, width, height, SWP_SHOWWINDOW);
+			//SetWindowPos(m_mainHwnd, HWND_TOPMOST, 0, 0, 200, 200, SWP_SHOWWINDOW);
 
 			//ViewSystem::get().FullScreen();
 
@@ -202,6 +217,20 @@ HRESULT WindowSystem::CreateRenderWindow()
 		this
 	);
 
+	/*m_renderHwnd = CreateWindow(
+		L"RenderWindow",
+		L"RenderWindow",
+		WS_CHILD | WS_VISIBLE,
+		0,
+		0,
+		200,
+		200,
+		m_mainHwnd,
+		NULL,
+		HINST_THISCOMPONENT,
+		this
+	);*/
+
 	return m_renderHwnd ? S_OK : E_FAIL;
 }
 
@@ -284,4 +313,9 @@ HWND* WindowSystem::pRenderHwnd()
 ID2D1HwndRenderTarget* WindowSystem::pRenderTarget()
 {
 	return m_pRenderTarget;
+}
+
+ID2D1Factory* WindowSystem::pFactory()
+{
+	return m_pD2DFactory;
 }

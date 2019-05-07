@@ -114,13 +114,15 @@ Rect ViewSystem::viewRect()
 	RECT rect;
 	GetClientRect(*(WindowSystem::get().pRenderHwnd()), &rect);
 
-	Rect view = Rect(m_translation.x, m_translation.y, (rect.right - rect.left + m_translation.x), (rect.bottom - rect.top + m_translation.y));
+	//Rect view = Rect(m_translation.x, m_translation.y, (rect.right - rect.left + m_translation.x), (rect.bottom - rect.top + m_translation.y));
 
 	/*float appendX = m_scale.x > 1.0f ? view.right * -1 * m_scale.x : view.right * m_scale.x;
 	float appendY = m_scale.y > 1.0f ? view.bottom * -1 * m_scale.y : view.bottom * m_scale.y;
 
 	view.right += appendX;
 	view.bottom += appendY;*/
+
+	Rect view = Rect(m_translation.x, m_translation.y, (m_worldSize.x + m_translation.x), (m_worldSize.y + m_translation.y));
 
 	return view;
 }

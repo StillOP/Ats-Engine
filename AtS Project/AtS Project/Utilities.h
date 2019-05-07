@@ -27,6 +27,11 @@ public:
 		if (!getPath) { filename = filename.substr(0, filename.find_last_of('.')); }
 	}
 
+	static unsigned int PairingFunction(unsigned int i, unsigned int j)
+	{
+		return (0.5 * ((i + j) * (i + j + 1))) + j;
+	}
+
 private:
 	Utilities() {}
 };

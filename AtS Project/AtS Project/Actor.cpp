@@ -55,7 +55,7 @@ void Actor::Update()
 
 	if (inputSys->IsKeyPressed(0x25))
 	{
-		m_owner->transform.position.x -= 800 * deltaTime;
+		m_owner->transform.Translate(Vector2(800.0f * deltaTime, 0.0f));
 	}
 }
 
@@ -126,7 +126,7 @@ void  Actor::OnStateUpdate(unsigned int state)
 			break;
 		}
 		
-		m_owner->transform.position.x += 800 * deltaTime;
+		m_owner->transform.Translate(Vector2(800.0f * deltaTime, 0.0f));
 
 		break;
 	}
@@ -158,7 +158,7 @@ void  Actor::OnStateUpdate(unsigned int state)
 			break;
 		}
 
-		m_owner->transform.position.x += 100 * deltaTime;
+		m_owner->transform.Translate(Vector2(100.0f * deltaTime, 0.0f));
 
 		break;
 	}

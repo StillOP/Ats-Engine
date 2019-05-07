@@ -15,7 +15,7 @@ void SpriteRenderer::bitmap(ID2D1Bitmap** bitmap)
 
 	m_size = Vector2((*bitmap)->GetSize().width, (*bitmap)->GetSize().height);
 
-	Vector2 position = m_owner->transform.position;
+	Vector2 position = m_owner->transform.position();
 	m_sourceRect = Rect(0.0f, 0.0f, m_size.x, m_size.y);
 }
 
@@ -26,7 +26,7 @@ void SpriteRenderer::bitmap(ID2D1Bitmap** bitmap, Rect& sourceRect)
 
 	m_size = Vector2((*bitmap)->GetSize().width, (*bitmap)->GetSize().height);
 
-	Vector2 position = m_owner->transform.position;
+	Vector2 position = m_owner->transform.position();
 	m_sourceRect = sourceRect;
 }
 
@@ -37,7 +37,7 @@ void SpriteRenderer::bitmap(ID2D1Bitmap** bitmap, Rect&& sourceRect)
 
 	m_size = Vector2((*bitmap)->GetSize().width, (*bitmap)->GetSize().height);
 
-	Vector2 position = m_owner->transform.position;
+	Vector2 position = m_owner->transform.position();
 	m_sourceRect = sourceRect;
 }
 

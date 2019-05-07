@@ -152,6 +152,12 @@
     <ClInclude Include="AnimationController.h" />
     <ClInclude Include="AnimationSystem.h" />
     <ClInclude Include="AnimationTestScene.h" />
+    <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="COLLIDER_DYNAMIC.h" />
+    <ClInclude Include="COLLIDER_TYPE.h" />
+    <ClInclude Include="CollisionSystem.h" />
+    <ClInclude Include="CollisionTestScene.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="DisplayMode.h" />
     <ClInclude Include="Haviour.h" />
@@ -167,6 +173,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceSystem.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RigidBodySystem.h" />
     <ClInclude Include="SceneSystem.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="StateController.h" />
@@ -182,13 +189,17 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimationController.cpp" />
     <ClCompile Include="AnimationSystem.cpp" />
-    <ClCompile Include="AnimationTestScene.cpp" />
+    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionSystem.cpp" />
     <ClCompile Include="GameObjectsCollection.cpp" />
     <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="ResourceSystem.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="RigidBodySystem.cpp" />
     <ClCompile Include="SceneSystem.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="StateController.cpp" />
@@ -198,6 +209,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="ViewSystem.cpp" />
     <ClCompile Include="WindowSystem.cpp" />
   </ItemGroup>

@@ -58,6 +58,8 @@ public:
 
 	ID2D1HwndRenderTarget* pRenderTarget();
 
+	ID2D1Factory* pFactory();
+
 private:
 	WindowSystem();
 

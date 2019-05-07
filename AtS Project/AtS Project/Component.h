@@ -14,8 +14,8 @@ public:
 	{ 
 		if (!m_owner) { m_owner = gameobject; }
 	}
-
-	GameObject* owner() const
+	
+	GameObject* owner()
 	{
 		return m_owner;
 	}

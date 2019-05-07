@@ -2,6 +2,7 @@
 #include "GameWorld.h"
 #include "SceneSystem.h"
 #include "AnimationTestScene.h"
+#include "CollisionTestScene.h"
 
 void GameWorld::Init()
 {
@@ -10,7 +11,9 @@ void GameWorld::Init()
 
 	SceneSystem* scnSys = &SceneSystem::get();
 	
-	scnSys->AddScene("Animation Test Scene", &AnimationTestScene::Init, AnimationTestScene());
-	scnSys->SwitchTo("Animation Test Scene");
+	//scnSys->AddScene("Animation Test Scene", &AnimationTestScene::Init, AnimationTestScene());
+	scnSys->AddScene("Collision Test Scene", &CollisionTestScene::Init, CollisionTestScene());
+
+	scnSys->SwitchTo("Collision Test Scene");
 
 }

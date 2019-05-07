@@ -6,6 +6,8 @@
 #include "SceneSystem.h"
 #include "InputSystem.h"
 #include "AnimationSystem.h"
+#include "CollisionSystem.h"
+#include "RigidBodySystem.h"
 #include "GameObjectsCollection.h"
 #include "GameWorld.h"
 #include "Time.h"
@@ -26,6 +28,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		InputSystem* inputSys = &InputSystem::get();
 		RenderSystem* renderSys = &RenderSystem::get();
 		AnimationSystem* animSys = &AnimationSystem::get();
+		CollisionSystem* collisionSystem = &CollisionSystem::get();
+		RigidBodySystem* rigidBodySystem = &RigidBodySystem::get();
 
 		GameObjectsCollection* goc = &GameObjectsCollection::get();
 
@@ -55,6 +59,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		wndSys->AddRenderWindowMessageListener<RenderSystem>(WM_PAINT, &RenderSystem::Render, renderSys);
 
 		animSys->Init();
+
+		collisionSystem->Init(scnSys->currentSceneId());
+
+		collisionSystem->SetDefaultColliderDynamicMode(COLLIDER_DYNAMIC::DYNAMIC);
+		collisionSystem->SetDebugMode(true);
+
+		rigidBodySystem->Init(scnSys->currentSceneId());
+
 
 		//Last init
 		gameWorld.Init();
@@ -87,19 +99,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 				goc->StateUpdate();
 				animSys->Update(time->elapsed);
+				goc->Update();
+				collisionSystem->Update();
 
 				lagTime = clock();
-
+				
 				while (time->lag >= time->deltaTime)
 				{
-					//resSys->Update();
-					goc->Update();
+					rigidBodySystem->Update(time->deltaTime);
+
 					time->lag -= time->deltaTime;
 				}
-
+				
 				lagTime = clock() - lagTime;
-
-				animSys->Update((double)lagTime / CLOCKS_PER_SEC);
+				//animSys->Update((double)lagTime / CLOCKS_PER_SEC);
 
 				UpdateWindow(*wndSys->pRenderHwnd());
 				/*InvalidateRect(*wndSys->pRenderHwnd(), NULL, FALSE);

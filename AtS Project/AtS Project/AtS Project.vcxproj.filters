@@ -37,6 +37,18 @@
     <Filter Include="AtS Project\Fichiers sources">
       <UniqueIdentifier>{7c1a4c40-43e5-48bb-9acf-147281829971}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Geometry">
+      <UniqueIdentifier>{9acbfd4d-0d89-497e-b4d4-882d66ffb3e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Enums">
+      <UniqueIdentifier>{4fe611b7-74f0-463c-ae59-95ed5f34aa92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Geometry">
+      <UniqueIdentifier>{bee333aa-8ff7-4054-8418-b75fa2f6dab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Structures">
+      <UniqueIdentifier>{674572d7-2e59-4a9e-8ccf-6ebb7dd33ed7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,16 +93,10 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>Fichiers d%27en-tête\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Fichiers d%27en-tête\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Utilities.h">
-      <Filter>Fichiers d%27en-tête\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
       <Filter>Fichiers d%27en-tête\Utils</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -125,6 +131,33 @@
     </ClInclude>
     <ClInclude Include="Haviour.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Fichiers d%27en-tête\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>Fichiers d%27en-tête\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionTestScene.h">
+      <Filter>AtS Project\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollider.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="COLLIDER_DYNAMIC.h">
+      <Filter>Fichiers d%27en-tête\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="COLLIDER_TYPE.h">
+      <Filter>Fichiers d%27en-tête\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodySystem.h">
+      <Filter>Fichiers d%27en-tête\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,14 +200,29 @@
     <ClCompile Include="InputSystem.cpp">
       <Filter>Fichiers sources\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationTestScene.cpp">
-      <Filter>AtS Project\Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>AtS Project\Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="StateController.cpp">
       <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionSystem.cpp">
+      <Filter>Fichiers sources\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollider.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBodySystem.cpp">
+      <Filter>Fichiers sources\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

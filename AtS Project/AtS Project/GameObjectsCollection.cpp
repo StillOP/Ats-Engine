@@ -16,6 +16,8 @@ void GameObjectsCollection::Init(const int* pCurrentSceneId)
 	m_pcomponentsMap.emplace(std::type_index(typeid(SpriteRenderer)), &m_spriteRenderers);
 	m_pcomponentsMap.emplace(std::type_index(typeid(AnimationController)), &m_animationControllers);
 	m_pcomponentsMap.emplace(std::type_index(typeid(StateController)), &m_stateControllers);
+	m_pcomponentsMap.emplace(std::type_index(typeid(BoxCollider)), &m_boxColliders);
+	m_pcomponentsMap.emplace(std::type_index(typeid(RigidBody)), &m_rigidBodys);
 }
 
 void GameObjectsCollection::Update()
@@ -77,8 +79,11 @@ GameObject* GameObjectsCollection::gameObject(std::string name)
 
 	m_gameObjectsTag.emplace(name, m_nextObjectId);
 	m_nextObjectId++;
+	
+	auto pObject = &m_gameObjectsCollection[*m_pCurrentSceneId].emplace(object.m_id, std::move(object)).first->second;
+	pObject->transform.owner(pObject);
 
-	return &m_gameObjectsCollection[*m_pCurrentSceneId].emplace(object.m_id, std::move(object)).first->second;
+	return pObject;
 }
 
 
@@ -234,6 +239,24 @@ void GameObjectsCollection::AddInRenderSystemCollection(GameObject* object)
 
 }
 
+void GameObjectsCollection::AddInCollisionSystemCollection(GameObject* object)
+{
+	Collider* pCollider = nullptr;
+	
+	auto colliders = m_request.GetDefaultColliderDynamic() == COLLIDER_DYNAMIC::DYNAMIC ? 
+		&(m_dynamicColliders[object->scene()][object->layer()]) : &(m_staticColliders[object->scene()][object->layer()]);
+	
+	if (object->HasComponent<BoxCollider>())
+	{
+		pCollider = object->GetComponent<BoxCollider>();
+	}
+
+	pCollider->colliderDynamic(m_request.GetDefaultColliderDynamic());
+	colliders->push_back(pCollider);
+
+	m_collidersForRendering[*m_pCurrentSceneId].push_back(pCollider);
+}
+
 void GameObjectsCollection::BindStateUpdate(GameObject* object)
 {
 	unsigned int id = m_gameObjectsTag.find(object->tag())->second;
@@ -246,6 +269,14 @@ void GameObjectsCollection::BindStateUpdate(GameObject* object)
 	}
 }
 
+void GameObjectsCollection::InitRigidBody(GameObject* object)
+{
+	auto rigidBody = object->GetComponent<RigidBody>();
+	rigidBody->transform(&(object->transform));
+
+	m_rigidBodysCollection[*m_pCurrentSceneId].push_back(rigidBody);
+}
+
 void GameObjectsCollection::ClearScene(unsigned int sceneId)
 {
 	for (auto& objectIt : m_gameObjectsCollection[sceneId])
@@ -254,4 +285,31 @@ void GameObjectsCollection::ClearScene(unsigned int sceneId)
 	}
 
 	m_gameObjectsCollection[sceneId].clear();
+}
+
+
+void GameObjectsCollection::SystemRequests::SetObjectCollisionDynamic(GameObject* object, COLLIDER_DYNAMIC dynamic)
+{
+	Collider * pCollider = nullptr;
+
+	if (object->HasComponent<BoxCollider>()) { pCollider = object->GetComponent<BoxCollider>(); }
+
+	if (pCollider->colliderDynamic() == dynamic) { return; }
+
+	auto pDynamicColliders = &(GameObjectsCollection::get().m_dynamicColliders[object->scene()][object->layer()]);
+	auto pStaticColliders = &(GameObjectsCollection::get().m_staticColliders[object->scene()][object->layer()]);
+
+	auto toRemoveOn = dynamic == COLLIDER_DYNAMIC::DYNAMIC ? pStaticColliders : pDynamicColliders;
+	auto toAddOn = dynamic == COLLIDER_DYNAMIC::DYNAMIC ? pDynamicColliders : pStaticColliders;
+
+	for (auto colliderIt = toRemoveOn->begin(); colliderIt != toRemoveOn->end(); ++colliderIt)
+	{
+		if ((*colliderIt)->owner()->id() == object->id())
+		{
+			colliderIt = toRemoveOn->erase(colliderIt);
+			toAddOn->push_back(pCollider);
+
+			return;
+		}
+	}
 }
